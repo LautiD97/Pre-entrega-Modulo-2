@@ -3,7 +3,8 @@ import MocksService from "../services/mocks.service.js";
 class MocksController {
   generateMocks = (req, res, next) => {
     try {
-      const data = MocksService.generateMocks();
+      const data = MocksService.generateMocks(req.body);
+
       res.status(200).json(data);
     } catch (error) {
       next(error);
@@ -12,7 +13,8 @@ class MocksController {
 
   seedMocks = async (req, res, next) => {
     try {
-      const result = await MocksService.seedMocks();
+      const result = await MocksService.seedMocks(req.body);
+
       res.status(201).json(result);
     } catch (error) {
       next(error);

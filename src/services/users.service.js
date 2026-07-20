@@ -1,4 +1,6 @@
 import UserRepository from "../repositories/users.repository.js";
+import AppError from "../errors/AppError.js";
+import ErrorCodes from "../errors/errorCodes.js";
 
 class UserService {
   async getAllUsers() {
@@ -9,7 +11,7 @@ class UserService {
     const user = await UserRepository.getById(id);
 
     if (!user) {
-      throw new Error("Usuario no encontrado");
+      throw new AppError(ErrorCodes.USER_NOT_FOUND);
     }
 
     return user;
@@ -23,7 +25,7 @@ class UserService {
     const user = await UserRepository.update(id, userData);
 
     if (!user) {
-      throw new Error("Usuario no encontrado");
+      throw new AppError(ErrorCodes.USER_NOT_FOUND);
     }
 
     return user;
@@ -33,7 +35,7 @@ class UserService {
     const user = await UserRepository.delete(id);
 
     if (!user) {
-      throw new Error("Usuario no encontrado");
+      throw new AppError(ErrorCodes.USER_NOT_FOUND);
     }
 
     return user;
