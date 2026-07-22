@@ -7,6 +7,7 @@ import {
 } from "../utils/mockGenerator.js";
 import AppError from "../errors/AppError.js";
 import ErrorCodes from "../errors/errorCodes.js";
+import logger from "../config/logger.js";
 
 class MocksService {
   validateQuantities(users, drivers) {
@@ -53,6 +54,10 @@ class MocksService {
           `driver-${(index % drivers.length) + 1}`
         )
       );
+
+      logger.info(
+  `Mocks generados correctamente - Usuarios: ${users.length}, Drivers: ${drivers.length}, Pedidos: ${orders.length}, Entregas: ${deliveries.length}`
+);
 
       return {
         users,
@@ -116,6 +121,10 @@ class MocksService {
           MocksRepository.createDelivery(delivery)
         )
       );
+
+      logger.info(
+  `Mocks insertados en MongoDB - Usuarios: ${createdUsers.length}, Drivers: ${createdDrivers.length}, Pedidos: ${createdOrders.length}, Entregas: ${createdDeliveries.length}`
+);
 
       return {
         users: createdUsers.length,
